@@ -1,0 +1,52 @@
+---
+title: "Week 5 Visualizations Activity"
+author: "Abdul Moid"
+date: "2023-06-21"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r code, echo=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```{r code1, echo=TRUE}
+
+# Install and load the necessary packages
+
+library(readr)
+library(ggplot2)
+
+# Load the dataset
+url <- "https://raw.githubusercontent.com/fivethirtyeight/data/b420a42e210b08d036467a481aaf404180979f3f/bad-drivers/bad-drivers.csv"
+df <- read_csv(url)
+
+# Display the first few rows of the dataset
+head(df)
+
+```{r code3, echo=TRUE}
+
+# Select the column for the histogram
+column <- "Number of drivers involved in fatal collisions per billion miles"
+
+# Create the histogram
+ggplot(df, aes(x = df[[column]])) +
+  geom_histogram(binwidth = 1, color = "black", fill = "lightblue") +
+  labs(title = "Distribution of Fatal Collisions per Billion Miles",
+       x = column,
+       y = "Frequency")
+
+
+```{r code4, echo=TRUE}
+
+
+# Select two variables for the scatter plot
+x_var <- "Percentage Of Drivers Involved In Fatal Collisions Who Were Speeding"
+y_var <- "Percentage Of Drivers Involved In Fatal Collisions Who Were Alcohol-Impaired"
+
+# Create the scatter plot
+ggplot(df, aes(x = df[[x_var]], y = df[[y_var]])) +
+  geom_point(color = "blue") +
+  labs(title = "Scatter Plot of Speeding vs. Alcohol-Impaired Drivers",
+       x = x_var,
+       y = y_var)
